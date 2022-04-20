@@ -4,9 +4,14 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/AndroidStudioProjects/Aragada/app/src/main/res/drawable/round_box.xml" value="0.244" />
-        <entry key="..\:/AndroidStudioProjects/Aragada/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/AndroidStudioProjects/Aragada/app/src/main/res/drawable/round_box2.xml" value="0.327" />
+        <entry key="..\:/AndroidStudioProjects/Aragada/app/src/main/res/drawable/round_box3.xml" value="0.3225" />
+        <entry key="..\:/AndroidStudioProjects/Aragada/app/src/main/res/drawable/study_correct.xml" value="0.327" />
+        <entry key="..\:/AndroidStudioProjects/Aragada/app/src/main/res/drawable/study_wrong.xml" value="0.327" />
+        <entry key="..\:/AndroidStudioProjects/Aragada/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/AndroidStudioProjects/Aragada/app/src/main/res/layout/activity_splash.xml" value="0.36614583333333334" />
-        <entry key="..\:/AndroidStudioProjects/Aragada/app/src/main/res/layout/activity_study.xml" value="0.30055579307396324" />
+        <entry key="..\:/AndroidStudioProjects/Aragada/app/src/main/res/layout/activity_study.xml" value="0.33" />
+        <entry key="..\:/AndroidStudioProjects/Aragada/app/src/main/res/layout/activity_test.xml" value="0.30055579307396324" />
       </map>
     </option>
   </component>
