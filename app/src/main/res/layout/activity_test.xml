@@ -1,9 +1,874 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".TestActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="7.8"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/btn_backHome"
+            android:layout_width="58dp"
+            android:layout_height="58dp"
+            android:src="@drawable/icon_back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.05"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:src="@drawable/logo_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
+
+        <ImageView
+            android:id="@+id/btn_search"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/icon_search"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.95"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="#F9F9F9"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_weight="4"
+            android:background="@drawable/round_box"
+            android:elevation="8dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.2"
+                android:orientation="horizontal"
+                android:gravity="center"
+                >
+                <TextView
+                    android:id="@+id/tv_row_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/noto_kr"
+                    android:gravity="center|bottom"
+                    android:includeFontPadding="false"
+                    android:text="아"
+                    android:textColor="#595959"
+                    android:textSize="65dp"
+                    android:layout_marginRight="8dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/noto_kr"
+                    android:gravity="center|bottom"
+                    android:includeFontPadding="false"
+                    android:text="행"
+                    android:paddingBottom="5dp"
+                    android:textColor="#787878"
+                    android:textSize="45dp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:background="#EEEEEE" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/tv_target1"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:background="@drawable/test_correct"
+                    android:elevation="5dp"
+                    android:fontFamily="@font/godo"
+                    android:gravity="center"
+                    android:text="あ"
+                    android:textColor="@color/theme"
+                    android:textSize="70dp" />
+
+                <TextView
+                    android:id="@+id/tv_target2"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="15dp"
+                    android:background="@drawable/test_correct"
+                    android:elevation="5dp"
+                    android:fontFamily="@font/godo"
+                    android:gravity="center"
+                    android:text="い"
+                    android:textColor="@color/theme"
+                    android:textSize="70dp" />
+
+                <TextView
+                    android:id="@+id/tv_target3"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:background="@drawable/test_target"
+                    android:elevation="5dp"
+                    android:fontFamily="@font/godo"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="@color/theme"
+                    android:textSize="70dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginBottom="30dp"
+                >
+                <TextView
+                    android:id="@+id/tv_target4"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginRight="17dp"
+                    android:layout_marginBottom="15dp"
+                    android:background="@drawable/test_unresolved"
+                    android:elevation="5dp"
+                    android:fontFamily="@font/godo"
+                    android:gravity="center"
+                    android:textColor="@color/theme"
+                    android:textSize="70dp" />
+
+                <TextView
+                    android:id="@+id/tv_target5"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginBottom="15dp"
+                    android:background="@drawable/test_unresolved"
+                    android:elevation="5dp"
+                    android:fontFamily="@font/godo"
+                    android:gravity="center"
+                    android:textColor="@color/theme"
+                    android:textSize="70dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="15dp"
+            android:layout_weight="5"
+            android:background="#ffffff"
+            android:elevation="8dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_option1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/test_option"
+                    android:fontFamily="@font/godo"
+                    android:text="ね"
+                    android:textColor="#595959"
+                    android:textSize="30dp"
+                    />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_option2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/test_option"
+                    android:elevation="1dp"
+                    android:fontFamily="@font/godo"
+                    android:text="ね"
+                    android:textColor="#595959"
+                    android:textSize="30dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_option3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/test_option"
+                    android:elevation="1dp"
+                    android:fontFamily="@font/godo"
+                    android:text="ね"
+                    android:textColor="#595959"
+                    android:textSize="30dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_option4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/test_option"
+                    android:elevation="1dp"
+                    android:fontFamily="@font/godo"
+                    android:text="ね"
+                    android:textColor="#595959"
+                    android:textSize="30dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_option5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/test_option"
+                    android:elevation="1dp"
+                    android:fontFamily="@font/godo"
+                    android:text="ね"
+                    android:textColor="#595959"
+                    android:textSize="30dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_option6"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/test_option"
+                    android:elevation="1dp"
+                    android:fontFamily="@font/godo"
+                    android:text="ね"
+                    android:textColor="#595959"
+                    android:textSize="30dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_option7"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/test_option"
+                    android:elevation="1dp"
+                    android:fontFamily="@font/godo"
+                    android:text="ね"
+                    android:textColor="#595959"
+                    android:textSize="30dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_option8"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/test_option"
+                    android:elevation="1dp"
+                    android:fontFamily="@font/godo"
+                    android:text="ね"
+                    android:textColor="#595959"
+                    android:textSize="30dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_option9"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/test_option"
+                    android:fontFamily="@font/godo"
+                    android:text="ね"
+                    android:textColor="#595959"
+                    android:textSize="30dp"
+                    />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_option10"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/test_option"
+                    android:elevation="1dp"
+                    android:fontFamily="@font/godo"
+                    android:text="ね"
+                    android:textColor="#595959"
+                    android:textSize="30dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_option11"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/test_option"
+                    android:elevation="1dp"
+                    android:fontFamily="@font/godo"
+                    android:text="ね"
+                    android:textColor="#595959"
+                    android:textSize="30dp"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_option12"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/test_option"
+                    android:elevation="1dp"
+                    android:fontFamily="@font/godo"
+                    android:text="ね"
+                    android:textColor="#595959"
+                    android:textSize="30dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_option13"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/test_option"
+                    android:elevation="1dp"
+                    android:fontFamily="@font/godo"
+                    android:text="ね"
+                    android:textColor="#595959"
+                    android:textSize="30dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_option14"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/test_option"
+                    android:elevation="1dp"
+                    android:fontFamily="@font/godo"
+                    android:text="ね"
+                    android:textColor="#595959"
+                    android:textSize="30dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_option15"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/test_option"
+                    android:elevation="1dp"
+                    android:fontFamily="@font/godo"
+                    android:text="ね"
+                    android:textColor="#595959"
+                    android:textSize="30dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_option16"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/test_option"
+                    android:elevation="1dp"
+                    android:fontFamily="@font/godo"
+                    android:text="ね"
+                    android:textColor="#595959"
+                    android:textSize="30dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_option17"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/test_option"
+                    android:fontFamily="@font/godo"
+                    android:text="ね"
+                    android:textColor="#595959"
+                    android:textSize="30dp"
+                    />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_option18"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/test_option"
+                    android:elevation="1dp"
+                    android:fontFamily="@font/godo"
+                    android:text="ね"
+                    android:textColor="#595959"
+                    android:textSize="30dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_option19"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/test_option"
+                    android:elevation="1dp"
+                    android:fontFamily="@font/godo"
+                    android:text="ね"
+                    android:textColor="#595959"
+                    android:textSize="30dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_option20"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/test_option"
+                    android:elevation="1dp"
+                    android:fontFamily="@font/godo"
+                    android:text="ね"
+                    android:textColor="#595959"
+                    android:textSize="30dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_option21"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/test_option"
+                    android:elevation="1dp"
+                    android:fontFamily="@font/godo"
+                    android:text="ね"
+                    android:textColor="#595959"
+                    android:textSize="30dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_option22"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/test_option"
+                    android:elevation="1dp"
+                    android:fontFamily="@font/godo"
+                    android:text="ね"
+                    android:textColor="#595959"
+                    android:textSize="30dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_option23"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/test_option"
+                    android:elevation="1dp"
+                    android:fontFamily="@font/godo"
+                    android:text="ね"
+                    android:textColor="#595959"
+                    android:textSize="30dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_option24"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/test_option"
+                    android:elevation="1dp"
+                    android:fontFamily="@font/godo"
+                    android:text="ね"
+                    android:textColor="#595959"
+                    android:textSize="30dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_option25"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/test_option"
+                    android:fontFamily="@font/godo"
+                    android:text="ね"
+                    android:textColor="#595959"
+                    android:textSize="30dp"
+                    />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_option26"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/test_option"
+                    android:elevation="1dp"
+                    android:fontFamily="@font/godo"
+                    android:text="ね"
+                    android:textColor="#595959"
+                    android:textSize="30dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_option27"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/test_option"
+                    android:elevation="1dp"
+                    android:fontFamily="@font/godo"
+                    android:text="ね"
+                    android:textColor="#595959"
+                    android:textSize="30dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_option28"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/test_option"
+                    android:elevation="1dp"
+                    android:fontFamily="@font/godo"
+                    android:text="ね"
+                    android:textColor="#595959"
+                    android:textSize="30dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_option29"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/test_option"
+                    android:elevation="1dp"
+                    android:fontFamily="@font/godo"
+                    android:text="ね"
+                    android:textColor="#595959"
+                    android:textSize="30dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_option30"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/test_option"
+                    android:elevation="1dp"
+                    android:fontFamily="@font/godo"
+                    android:text="ね"
+                    android:textColor="#595959"
+                    android:textSize="30dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_option31"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/test_option"
+                    android:elevation="1dp"
+                    android:fontFamily="@font/godo"
+                    android:text="ね"
+                    android:textColor="#595959"
+                    android:textSize="30dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_option32"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/test_option"
+                    android:elevation="1dp"
+                    android:fontFamily="@font/godo"
+                    android:text="ね"
+                    android:textColor="#595959"
+                    android:textSize="30dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_option33"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/test_option"
+                    android:fontFamily="@font/godo"
+                    android:text="ね"
+                    android:textColor="#595959"
+                    android:textSize="30dp"
+                    />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_option34"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/test_option"
+                    android:elevation="1dp"
+                    android:fontFamily="@font/godo"
+                    android:text="ね"
+                    android:textColor="#595959"
+                    android:textSize="30dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_option35"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/test_option"
+                    android:elevation="1dp"
+                    android:fontFamily="@font/godo"
+                    android:text="ね"
+                    android:textColor="#595959"
+                    android:textSize="30dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_option36"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/test_option"
+                    android:elevation="1dp"
+                    android:fontFamily="@font/godo"
+                    android:text="ね"
+                    android:textColor="#595959"
+                    android:textSize="30dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_option37"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/test_option"
+                    android:elevation="1dp"
+                    android:fontFamily="@font/godo"
+                    android:text="ね"
+                    android:textColor="#595959"
+                    android:textSize="30dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_option38"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/test_option"
+                    android:elevation="1dp"
+                    android:fontFamily="@font/godo"
+                    android:text="ね"
+                    android:textColor="#595959"
+                    android:textSize="30dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_option39"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/test_option"
+                    android:elevation="1dp"
+                    android:fontFamily="@font/godo"
+                    android:text="ね"
+                    android:textColor="#595959"
+                    android:textSize="30dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_option40"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/test_option"
+                    android:elevation="1dp"
+                    android:fontFamily="@font/godo"
+                    android:text="ね"
+                    android:textColor="#595959"
+                    android:textSize="30dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_option41"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/test_option"
+                    android:fontFamily="@font/godo"
+                    android:text="ね"
+                    android:textColor="#595959"
+                    android:textSize="30dp"
+                    />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_option42"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/test_option"
+                    android:elevation="1dp"
+                    android:fontFamily="@font/godo"
+                    android:text="ね"
+                    android:textColor="#595959"
+                    android:textSize="30dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_option43"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/test_option"
+                    android:elevation="1dp"
+                    android:fontFamily="@font/godo"
+                    android:text="ね"
+                    android:textColor="#595959"
+                    android:textSize="30dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_option44"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/test_option"
+                    android:elevation="1dp"
+                    android:fontFamily="@font/godo"
+                    android:text="ね"
+                    android:textColor="#595959"
+                    android:textSize="30dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_option45"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/test_option"
+                    android:elevation="1dp"
+                    android:fontFamily="@font/godo"
+                    android:text="ね"
+                    android:textColor="#595959"
+                    android:textSize="30dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_option46"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/test_option"
+                    android:elevation="1dp"
+                    android:fontFamily="@font/godo"
+                    android:text="ね"
+                    android:textColor="#595959"
+                    android:textSize="30dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_option47"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/test_option"
+                    android:elevation="1dp"
+                    android:fontFamily="@font/godo"
+                    android:text="ね"
+                    android:textColor="#595959"
+                    android:textSize="30dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_option48"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/test_option"
+                    android:elevation="1dp"
+                    android:fontFamily="@font/godo"
+                    android:text="ね"
+                    android:textColor="#595959"
+                    android:textSize="30dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

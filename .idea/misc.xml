@@ -8,17 +8,19 @@
         <entry key="..\:/AndroidStudioProjects/Aragada/app/src/main/res/drawable/round_box3.xml" value="0.3225" />
         <entry key="..\:/AndroidStudioProjects/Aragada/app/src/main/res/drawable/study_correct.xml" value="0.327" />
         <entry key="..\:/AndroidStudioProjects/Aragada/app/src/main/res/drawable/study_wrong.xml" value="0.327" />
+        <entry key="..\:/AndroidStudioProjects/Aragada/app/src/main/res/drawable/test_correct.xml" value="0.2635" />
+        <entry key="..\:/AndroidStudioProjects/Aragada/app/src/main/res/drawable/test_option.xml" value="0.2635" />
+        <entry key="..\:/AndroidStudioProjects/Aragada/app/src/main/res/drawable/test_target.xml" value="0.2635" />
+        <entry key="..\:/AndroidStudioProjects/Aragada/app/src/main/res/drawable/test_unresolved.xml" value="0.2635" />
+        <entry key="..\:/AndroidStudioProjects/Aragada/app/src/main/res/drawable/test_wrong.xml" value="0.2635" />
         <entry key="..\:/AndroidStudioProjects/Aragada/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/AndroidStudioProjects/Aragada/app/src/main/res/layout/activity_splash.xml" value="0.36614583333333334" />
-        <entry key="..\:/AndroidStudioProjects/Aragada/app/src/main/res/layout/activity_study.xml" value="0.33" />
-        <entry key="..\:/AndroidStudioProjects/Aragada/app/src/main/res/layout/activity_test.xml" value="0.30055579307396324" />
-        <entry key="..\:/Users/application_st25/Desktop/Android_work/Aragada/app/src/main/res/drawable/study_base.xml" value="0.246" />
-        <entry key="..\:/Users/application_st25/Desktop/Android_work/Aragada/app/src/main/res/layout/activity_main.xml" value="0.261650277896537" />
-        <entry key="..\:/Users/application_st25/Desktop/Android_work/Aragada/app/src/main/res/layout/activity_study.xml" value="0.33" />
+        <entry key="..\:/AndroidStudioProjects/Aragada/app/src/main/res/layout/activity_study.xml" value="0.25" />
+        <entry key="..\:/AndroidStudioProjects/Aragada/app/src/main/res/layout/activity_test.xml" value="0.25" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
