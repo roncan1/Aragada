@@ -20,7 +20,7 @@ public class StudyActivity extends AppCompatActivity {
     ImageView btn_search, btn_backHome;
     AppCompatButton[] btn_option = new AppCompatButton[4];
     int category, correct;
-    String[] original = new String[48], pronunciation = new String[48];
+    String[] arrayOriginal = new String[48], arrayPronunciation = new String[48];
 
 
     @Override
@@ -65,12 +65,12 @@ public class StudyActivity extends AppCompatActivity {
         int index = random.nextInt(46); // 일본어 index
         correct = random.nextInt(4); // 정답 자리 index
 
-        tv_original.setText(original[index]);
-        btn_option[correct].setText(pronunciation[index]);
+        tv_original.setText(arrayOriginal[index]);
+        btn_option[correct].setText(arrayPronunciation[index]);
 
         for (int i = 0; i < btn_option.length; i++) {
             if (i != correct) {
-                btn_option[i].setText(pronunciation[random.nextInt(46)]);
+                btn_option[i].setText(arrayPronunciation[random.nextInt(46)]);
             }
         }
     }
@@ -137,177 +137,177 @@ public class StudyActivity extends AppCompatActivity {
     }
 
     void setPronunciation() {
-        pronunciation[0] = "아";
-        pronunciation[1] = "이";
-        pronunciation[2] = "우";
-        pronunciation[3] = "에";
-        pronunciation[4] = "오";
+        arrayPronunciation[0] = "아";
+        arrayPronunciation[1] = "이";
+        arrayPronunciation[2] = "우";
+        arrayPronunciation[3] = "에";
+        arrayPronunciation[4] = "오";
 
-        pronunciation[5] = "카";
-        pronunciation[6] = "키";
-        pronunciation[7] = "쿠";
-        pronunciation[8] = "케";
-        pronunciation[9] = "코";
+        arrayPronunciation[5] = "카";
+        arrayPronunciation[6] = "키";
+        arrayPronunciation[7] = "쿠";
+        arrayPronunciation[8] = "케";
+        arrayPronunciation[9] = "코";
 
-        pronunciation[10] = "사";
-        pronunciation[11] = "시";
-        pronunciation[12] = "스";
-        pronunciation[13] = "세";
-        pronunciation[14] = "소";
+        arrayPronunciation[10] = "사";
+        arrayPronunciation[11] = "시";
+        arrayPronunciation[12] = "스";
+        arrayPronunciation[13] = "세";
+        arrayPronunciation[14] = "소";
 
-        pronunciation[15] = "타";
-        pronunciation[16] = "치";
-        pronunciation[17] = "츠";
-        pronunciation[18] = "테";
-        pronunciation[19] = "토";
+        arrayPronunciation[15] = "타";
+        arrayPronunciation[16] = "치";
+        arrayPronunciation[17] = "츠";
+        arrayPronunciation[18] = "테";
+        arrayPronunciation[19] = "토";
 
-        pronunciation[20] = "나";
-        pronunciation[21] = "니";
-        pronunciation[22] = "누";
-        pronunciation[23] = "네";
-        pronunciation[24] = "노";
+        arrayPronunciation[20] = "나";
+        arrayPronunciation[21] = "니";
+        arrayPronunciation[22] = "누";
+        arrayPronunciation[23] = "네";
+        arrayPronunciation[24] = "노";
 
-        pronunciation[25] = "하";
-        pronunciation[26] = "히";
-        pronunciation[27] = "후";
-        pronunciation[28] = "헤";
-        pronunciation[29] = "호";
+        arrayPronunciation[25] = "하";
+        arrayPronunciation[26] = "히";
+        arrayPronunciation[27] = "후";
+        arrayPronunciation[28] = "헤";
+        arrayPronunciation[29] = "호";
 
-        pronunciation[30] = "마";
-        pronunciation[31] = "미";
-        pronunciation[32] = "무";
-        pronunciation[33] = "메";
-        pronunciation[34] = "모";
+        arrayPronunciation[30] = "마";
+        arrayPronunciation[31] = "미";
+        arrayPronunciation[32] = "무";
+        arrayPronunciation[33] = "메";
+        arrayPronunciation[34] = "모";
 
-        pronunciation[35] = "야";
-        pronunciation[36] = "유";
-        pronunciation[37] = "요";
+        arrayPronunciation[35] = "야";
+        arrayPronunciation[36] = "유";
+        arrayPronunciation[37] = "요";
 
-        pronunciation[38] = "라";
-        pronunciation[39] = "리";
-        pronunciation[40] = "루";
-        pronunciation[41] = "레";
-        pronunciation[42] = "로";
+        arrayPronunciation[38] = "라";
+        arrayPronunciation[39] = "리";
+        arrayPronunciation[40] = "루";
+        arrayPronunciation[41] = "레";
+        arrayPronunciation[42] = "로";
 
-        pronunciation[43] = "와";
-        pronunciation[44] = "오";
-        pronunciation[45] = "은";
+        arrayPronunciation[43] = "와";
+        arrayPronunciation[44] = "오";
+        arrayPronunciation[45] = "은";
     }
 
     void setHiragana() {
-        original[0] = "あ";
-        original[1] = "い";
-        original[2] = "う";
-        original[3] = "え";
-        original[4] = "お";
+        arrayOriginal[0] = "あ";
+        arrayOriginal[1] = "い";
+        arrayOriginal[2] = "う";
+        arrayOriginal[3] = "え";
+        arrayOriginal[4] = "お";
 
-        original[5] = "か";
-        original[6] = "き";
-        original[7] = "く";
-        original[8] = "け";
-        original[9] = "こ";
+        arrayOriginal[5] = "か";
+        arrayOriginal[6] = "き";
+        arrayOriginal[7] = "く";
+        arrayOriginal[8] = "け";
+        arrayOriginal[9] = "こ";
 
-        original[10] = "さ";
-        original[11] = "し";
-        original[12] = "す";
-        original[13] = "せ";
-        original[14] = "そ";
+        arrayOriginal[10] = "さ";
+        arrayOriginal[11] = "し";
+        arrayOriginal[12] = "す";
+        arrayOriginal[13] = "せ";
+        arrayOriginal[14] = "そ";
 
-        original[15] = "た";
-        original[16] = "ち";
-        original[17] = "つ";
-        original[18] = "て";
-        original[19] = "と";
+        arrayOriginal[15] = "た";
+        arrayOriginal[16] = "ち";
+        arrayOriginal[17] = "つ";
+        arrayOriginal[18] = "て";
+        arrayOriginal[19] = "と";
 
-        original[20] = "な";
-        original[21] = "に";
-        original[22] = "ぬ";
-        original[23] = "ね";
-        original[24] = "の";
+        arrayOriginal[20] = "な";
+        arrayOriginal[21] = "に";
+        arrayOriginal[22] = "ぬ";
+        arrayOriginal[23] = "ね";
+        arrayOriginal[24] = "の";
 
-        original[25] = "は";
-        original[26] = "ひ";
-        original[27] = "ふ";
-        original[28] = "へ";
-        original[29] = "ほ";
+        arrayOriginal[25] = "は";
+        arrayOriginal[26] = "ひ";
+        arrayOriginal[27] = "ふ";
+        arrayOriginal[28] = "へ";
+        arrayOriginal[29] = "ほ";
 
-        original[30] = "ま";
-        original[31] = "み";
-        original[32] = "む";
-        original[33] = "め";
-        original[34] = "も";
+        arrayOriginal[30] = "ま";
+        arrayOriginal[31] = "み";
+        arrayOriginal[32] = "む";
+        arrayOriginal[33] = "め";
+        arrayOriginal[34] = "も";
 
-        original[35] = "や";
-        original[36] = "ゆ";
-        original[37] = "よ";
+        arrayOriginal[35] = "や";
+        arrayOriginal[36] = "ゆ";
+        arrayOriginal[37] = "よ";
 
-        original[38] = "ら";
-        original[39] = "り";
-        original[40] = "る";
-        original[41] = "れ";
-        original[42] = "ろ";
+        arrayOriginal[38] = "ら";
+        arrayOriginal[39] = "り";
+        arrayOriginal[40] = "る";
+        arrayOriginal[41] = "れ";
+        arrayOriginal[42] = "ろ";
 
-        original[43] = "わ";
-        original[44] = "を";
-        original[45] = "ん";
+        arrayOriginal[43] = "わ";
+        arrayOriginal[44] = "を";
+        arrayOriginal[45] = "ん";
     }
 
     void setGatakana() {
-        original[0] = "ア";
-        original[1] = "イ";
-        original[2] = "ウ";
-        original[3] = "エ";
-        original[4] = "オ";
+        arrayOriginal[0] = "ア";
+        arrayOriginal[1] = "イ";
+        arrayOriginal[2] = "ウ";
+        arrayOriginal[3] = "エ";
+        arrayOriginal[4] = "オ";
 
-        original[5] = "カ";
-        original[6] = "キ";
-        original[7] = "ク";
-        original[8] = "ケ";
-        original[9] = "コ";
+        arrayOriginal[5] = "カ";
+        arrayOriginal[6] = "キ";
+        arrayOriginal[7] = "ク";
+        arrayOriginal[8] = "ケ";
+        arrayOriginal[9] = "コ";
 
-        original[10] = "サ";
-        original[11] = "シ";
-        original[12] = "ス";
-        original[13] = "セ";
-        original[14] = "ソ";
+        arrayOriginal[10] = "サ";
+        arrayOriginal[11] = "シ";
+        arrayOriginal[12] = "ス";
+        arrayOriginal[13] = "セ";
+        arrayOriginal[14] = "ソ";
 
-        original[15] = "タ";
-        original[16] = "チ";
-        original[17] = "ツ";
-        original[18] = "テ";
-        original[19] = "ト";
+        arrayOriginal[15] = "タ";
+        arrayOriginal[16] = "チ";
+        arrayOriginal[17] = "ツ";
+        arrayOriginal[18] = "テ";
+        arrayOriginal[19] = "ト";
 
-        original[20] = "ナ";
-        original[21] = "ニ";
-        original[22] = "ヌ";
-        original[23] = "ネ";
-        original[24] = "ノ";
+        arrayOriginal[20] = "ナ";
+        arrayOriginal[21] = "ニ";
+        arrayOriginal[22] = "ヌ";
+        arrayOriginal[23] = "ネ";
+        arrayOriginal[24] = "ノ";
 
-        original[25] = "ハ";
-        original[26] = "ヒ";
-        original[27] = "フ";
-        original[28] = "ヘ";
-        original[29] = "ホ";
+        arrayOriginal[25] = "ハ";
+        arrayOriginal[26] = "ヒ";
+        arrayOriginal[27] = "フ";
+        arrayOriginal[28] = "ヘ";
+        arrayOriginal[29] = "ホ";
 
-        original[30] = "マ";
-        original[31] = "ミ";
-        original[32] = "ム";
-        original[33] = "メ";
-        original[34] = "モ";
+        arrayOriginal[30] = "マ";
+        arrayOriginal[31] = "ミ";
+        arrayOriginal[32] = "ム";
+        arrayOriginal[33] = "メ";
+        arrayOriginal[34] = "モ";
 
-        original[35] = "ヤ";
-        original[36] = "ユ";
-        original[37] = "ヨ";
+        arrayOriginal[35] = "ヤ";
+        arrayOriginal[36] = "ユ";
+        arrayOriginal[37] = "ヨ";
 
-        original[38] = "ラ";
-        original[39] = "リ";
-        original[40] = "ル";
-        original[41] = "レ";
-        original[42] = "ロ";
+        arrayOriginal[38] = "ラ";
+        arrayOriginal[39] = "リ";
+        arrayOriginal[40] = "ル";
+        arrayOriginal[41] = "レ";
+        arrayOriginal[42] = "ロ";
 
-        original[43] = "ワ";
-        original[44] = "ヲ";
-        original[45] = "ン";
+        arrayOriginal[43] = "ワ";
+        arrayOriginal[44] = "ヲ";
+        arrayOriginal[45] = "ン";
     }
 
 
