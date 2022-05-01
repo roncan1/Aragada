@@ -116,8 +116,8 @@
 
                 <TextView
                     android:id="@+id/tv_target1"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
                     android:layout_marginTop="15dp"
                     android:layout_marginRight="15dp"
                     android:layout_marginBottom="15dp"
@@ -131,8 +131,8 @@
 
                 <TextView
                     android:id="@+id/tv_target2"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="15dp"
                     android:layout_marginRight="20dp"
@@ -147,8 +147,8 @@
 
                 <TextView
                     android:id="@+id/tv_target3"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="15dp"
                     android:layout_marginBottom="15dp"
@@ -171,8 +171,8 @@
                 >
                 <TextView
                     android:id="@+id/tv_target4"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
                     android:layout_marginRight="17dp"
                     android:layout_marginBottom="15dp"
                     android:background="@drawable/test_unresolved"
@@ -184,8 +184,8 @@
 
                 <TextView
                     android:id="@+id/tv_target5"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
                     android:layout_marginLeft="18dp"
                     android:layout_marginBottom="15dp"
                     android:background="@drawable/test_unresolved"
@@ -841,31 +841,6 @@
                     android:textColor="#595959"
                     android:textSize="30dp" />
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_option47"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_margin="5dp"
-                    android:background="@drawable/test_option"
-                    android:elevation="1dp"
-                    android:fontFamily="@font/godo"
-                    android:text="ね"
-                    android:textColor="#595959"
-                    android:textSize="30dp" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_option48"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_margin="5dp"
-                    android:background="@drawable/test_option"
-                    android:elevation="1dp"
-                    android:fontFamily="@font/godo"
-                    android:text="ね"
-                    android:textColor="#595959"
-                    android:textSize="30dp" />
             </LinearLayout>
         </LinearLayout>
 
