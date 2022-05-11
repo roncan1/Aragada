@@ -10,16 +10,16 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.nio.file.Files;
-
 public class TestActivity extends AppCompatActivity {
 
     ImageView btn_search, btn_backHome;
     TextView tv_rowName;
     TextView[] tv_target = new TextView[5];
     AppCompatButton[] btnOption = new AppCompatButton[46];
-    int category;
-    String[] arrayOriginal = new String[46];
+    int category, rowIndex = 0, correctIndex = 0;
+    String correctValue;
+    String[] arrayOriginal = new String[46],
+             arrayRowName = new String[10];
 
 
     @Override
@@ -29,6 +29,35 @@ public class TestActivity extends AppCompatActivity {
         init();
         search_japanese();
         backHome();
+    }
+
+    void setOnClick() {
+        for (int i = 0; i < btnOption.length; i++) {
+
+        }
+    }
+
+    void setNewRow(int rowNum) {
+        tv_rowName.setText(arrayRowName[rowNum]);
+        setBtnTarget(tv_target[0]);
+        setBtnUnresolved(tv_target[1]);
+        setBtnUnresolved(tv_target[2]);
+        setBtnUnresolved(tv_target[3]);
+        setBtnUnresolved(tv_target[4]);
+    }
+    void setBtnTarget(TextView tv) {
+        tv.setText(" ");
+        tv.setBackgroundResource(R.drawable.test_target);
+    }
+
+    void setBtnUnresolved(TextView tv) {
+        tv.setText(" ");
+        tv.setBackgroundResource(R.drawable.test_unresolved);
+    }
+
+    void setBtnCorrect(TextView tv) {
+        tv.setText(correctValue);
+        tv.setBackgroundResource(R.drawable.test_correct);
     }
 
     void backHome() {
@@ -140,7 +169,18 @@ public class TestActivity extends AppCompatActivity {
         btnOption[44] = (AppCompatButton) findViewById(R.id.btn_option45);
         btnOption[45] = (AppCompatButton) findViewById(R.id.btn_option46);
 
+        arrayRowName[0] = "아";
+        arrayRowName[1] = "카";
+        arrayRowName[2] = "사";
+        arrayRowName[3] = "카";
+        arrayRowName[4] = "나";
+        arrayRowName[5] = "하";
+        arrayRowName[6] = "마";
+        arrayRowName[7] = "와";
+        arrayRowName[8] = "라";
+        arrayRowName[9] = "야";
         initBtnOpt(); // 버튼 세팅
+        setNewRow(rowIndex);
     }
 
     void setHiragana() {
