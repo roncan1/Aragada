@@ -6,9 +6,14 @@ import androidx.appcompat.widget.AppCompatButton;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Vibrator;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class TestActivity extends AppCompatActivity {
 
@@ -16,7 +21,7 @@ public class TestActivity extends AppCompatActivity {
     TextView tv_rowName;
     TextView[] tv_target = new TextView[5];
     AppCompatButton[] btnOption = new AppCompatButton[46];
-    int category, rowIndex = 0, correctIndex = 0;
+    int category, rowIndex = 0, correctIndex = 0, targetNum = 0;
     String correctValue;
     String[] arrayOriginal = new String[46],
              arrayRowName = new String[10];
@@ -29,11 +34,83 @@ public class TestActivity extends AppCompatActivity {
         init();
         search_japanese();
         backHome();
+        setOnClick();
+    }
+
+    public void setCorrectValue(int correctIndex) {
+        this.correctValue = arrayOriginal[correctIndex];
+    }
+
+    public String getCorrectValue(int correctIndex) {
+        setCorrectValue(correctIndex);
+        return correctValue;
+    }
+
+    void checkCorrect(int index) {
+        String btnStringTmp = btnOption[index].getText().toString(); // 클릭된 버튼의 text 가져오기
+        if (btnStringTmp == getCorrectValue(correctIndex)) { // 버튼이 정답일 경우
+            btnOption[index].setVisibility(View.GONE); // 눌러진 버튼 없애기
+            correctIndex++; // 정답인덱스 +1
+            if (targetNum == 4) { // 다음 행으로 넘기기
+                Log.d("TestActivity :", "targetNum(a) : " + targetNum);
+                targetNum = 0;
+                rowIndex++;
+                setNewRow(rowIndex);
+            } else if (correctIndex == 45) {
+//                모든것이 끝났을 때 효과주기
+                testClear();
+            } else {
+                Log.d("TestActivity :", "targetNum(b) : " + targetNum);
+                setBtnCorrect(tv_target[targetNum]);
+                targetNum++;
+                setBtnTarget(tv_target[targetNum]);
+                setCorrectValue(correctIndex);
+            }
+        }  else { // 버튼이 정답이 아닐경우
+            Log.d("TestActivity :", "targetNum(c) : " + targetNum);
+            setBtnWrong(tv_target[targetNum]); // tv_target[targetNum]을 setWrong()
+            for (int i = 0; i < btnOption.length; i++) { // 모든 버튼 클릭 차단
+                final int a = i;
+                btnOption[i].setClickable(false);
+            }
+            new Handler().postDelayed(new Runnable() // 딜레이 후 원상복귀
+            {
+                @Override
+                public void run()
+                {
+                    for (int i = 0; i < btnOption.length; i++) {
+                        final int a = i;
+                        btnOption[i].setClickable(true);
+                    }
+                    setBtnTarget(tv_target[targetNum]);
+                }
+            }, 600);
+        }
+    }
+
+    private void testClear() {
+        new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
+                .setTitleText("축하합니다!")
+                .setContentText("모든 테스트를 통과하셨습니다!")
+                .setConfirmText("끝내기")
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        finish();
+                    }
+                })
+                .show();
     }
 
     void setOnClick() {
         for (int i = 0; i < btnOption.length; i++) {
-
+            final int index = i;
+            btnOption[i].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    checkCorrect(index);
+                }
+            });
         }
     }
 
@@ -45,6 +122,7 @@ public class TestActivity extends AppCompatActivity {
         setBtnUnresolved(tv_target[3]);
         setBtnUnresolved(tv_target[4]);
     }
+
     void setBtnTarget(TextView tv) {
         tv.setText(" ");
         tv.setBackgroundResource(R.drawable.test_target);
@@ -53,6 +131,11 @@ public class TestActivity extends AppCompatActivity {
     void setBtnUnresolved(TextView tv) {
         tv.setText(" ");
         tv.setBackgroundResource(R.drawable.test_unresolved);
+    }
+
+    void setBtnWrong(TextView tv) {
+        tv.setText(" ");
+        tv.setBackgroundResource(R.drawable.test_wrong);
     }
 
     void setBtnCorrect(TextView tv) {
@@ -181,6 +264,7 @@ public class TestActivity extends AppCompatActivity {
         arrayRowName[9] = "야";
         initBtnOpt(); // 버튼 세팅
         setNewRow(rowIndex);
+        setCorrectValue(correctIndex);
     }
 
     void setHiragana() {
