@@ -51,12 +51,12 @@ public class TestActivity extends AppCompatActivity {
         if (btnStringTmp == getCorrectValue(correctIndex)) { // 버튼이 정답일 경우
             btnOption[index].setVisibility(View.GONE); // 눌러진 버튼 없애기
             correctIndex++; // 정답인덱스 +1
-            if (targetNum == 4) { // 다음 행으로 넘기기
+            if (targetNum == 4 || correctIndex == 38) { // 다음 행으로 넘기기
                 Log.d("TestActivity :", "targetNum(a) : " + targetNum);
                 targetNum = 0;
                 rowIndex++;
                 setNewRow(rowIndex);
-            } else if (correctIndex == 45) {
+            } else if (correctIndex == 46) {
 //                모든것이 끝났을 때 효과주기
                 testClear();
             } else {
@@ -255,7 +255,7 @@ public class TestActivity extends AppCompatActivity {
         arrayRowName[0] = "아";
         arrayRowName[1] = "카";
         arrayRowName[2] = "사";
-        arrayRowName[3] = "카";
+        arrayRowName[3] = "타";
         arrayRowName[4] = "나";
         arrayRowName[5] = "하";
         arrayRowName[6] = "마";
