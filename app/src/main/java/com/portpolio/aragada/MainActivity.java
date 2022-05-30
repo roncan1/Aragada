@@ -7,10 +7,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 public class MainActivity extends AppCompatActivity {
 
     ImageView btn_hiragana_study, btn_hiragana_test, btn_gatakana_study, btn_gatakana_test, btn_search;
+    LinearLayout btn_daara;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,38 +29,49 @@ public class MainActivity extends AppCompatActivity {
         btn_hiragana_study.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startStudy(1);
+                startStudyActivity(1);
             }
         });
         btn_hiragana_test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startTest(1);
+                startTestActivity(1);
             }
         });
         btn_gatakana_study.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startStudy(2);
+                startStudyActivity(2);
             }
         });
         btn_gatakana_test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startTest(2);
+                startTestActivity(2);
+            }
+        });
+        btn_daara.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startChatBotActivity();
             }
         });
     }
 
-    void startStudy(int category) {
+    void startStudyActivity(int category) {
         Intent intent = new Intent(MainActivity.this, StudyActivity.class);
         intent.putExtra("category", category);
         startActivity(intent);
     }
 
-    void startTest(int category) {
+    void startTestActivity(int category) {
         Intent intent = new Intent(MainActivity.this, TestActivity.class);
         intent.putExtra("category", category);
+        startActivity(intent);
+    }
+
+    void startChatBotActivity() {
+        Intent intent = new Intent(MainActivity.this, ChatBotActivity.class);
         startActivity(intent);
     }
 
@@ -80,5 +93,6 @@ public class MainActivity extends AppCompatActivity {
         btn_gatakana_study = (ImageView) findViewById(R.id.btn_gatakana_study);
         btn_gatakana_test = (ImageView) findViewById(R.id.btn_gatakana_test);
         btn_search = (ImageView) findViewById(R.id.btn_search);
+        btn_daara = (LinearLayout) findViewById(R.id.btn_daara);
     }
 }
