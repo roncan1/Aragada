@@ -65,7 +65,7 @@
                 android:fontFamily="@font/godo"
                 android:gravity="center"
                 android:text="히라가나  ひらがな"
-                android:textColor="@color/theme"
+                android:textColor="@color/titleColor"
                 android:textSize="30dp"
                 android:textStyle="italic" />
 
@@ -124,7 +124,7 @@
                 android:fontFamily="@font/godo"
                 android:gravity="center"
                 android:text="가타카나  カタカナ"
-                android:textColor="@color/theme"
+                android:textColor="@color/titleColor"
                 android:textSize="30dp"
                 android:textStyle="italic" />
 
@@ -181,7 +181,7 @@
                 android:fontFamily="@font/godo"
                 android:gravity="center"
                 android:text="Mr.다아라와 대화하기"
-                android:textColor="@color/theme"
+                android:textColor="@color/titleColor"
                 android:textSize="28dp"
                 android:textStyle="italic" />
 
@@ -193,11 +193,38 @@
                 android:background="#EEEEEE" />
 
             <LinearLayout
+                android:id="@+id/btn_daara"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="horizontal"
+                android:background="@drawable/round_box_daara"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:paddingLeft="20dp"
+                android:elevation="3dp"
                 >
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="2"
+                    android:src="@drawable/daara_icon" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="&quot;다아라&quot; 씨와&#10;대화하러가기"
+                    android:gravity="center"
+                    android:fontFamily="@font/godo"
+                    android:textColor="@color/white"
+                    android:textSize="33dp"
+                    android:textStyle="italic"
+                    android:layout_marginRight="15dp"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
