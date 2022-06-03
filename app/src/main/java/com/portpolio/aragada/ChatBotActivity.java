@@ -10,12 +10,15 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
@@ -29,6 +32,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.googlecode.tesseract.android.TessBaseAPI;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 
 
@@ -41,7 +52,9 @@ public class ChatBotActivity extends AppCompatActivity {
     Dialog ocrDialog;
     final int PERMISSION = 1;
     Intent intent;
-    boolean drawing = false;
+    boolean drawing = false; // 그려지고 있는가
+    private TessBaseAPI mTess; //Tess API reference
+    String datapath = ""; //언어데이터가 있는 경로
 
 
     @Override
@@ -49,10 +62,12 @@ public class ChatBotActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_bot);
         init();
+        initOCR();
         setBtn_stt();
         setDialog();
         popUpOcrDialog();
         setCanvas();
+
     }
 
     void checkPermission() {
@@ -126,6 +141,73 @@ public class ChatBotActivity extends AppCompatActivity {
         speechRecognizer.startListening(intent);
     }
 
+    void initOCR() {
+        //언어파일 경로
+        datapath = getFilesDir()+ "/tesseract/";
+
+        //트레이닝데이터가 카피되어 있는지 체크
+        checkFile(new File(datapath + "tessdata/"), "jpn");
+
+        //Tesseract API 언어 세팅
+        String lang = "jpn";
+
+        //OCR 세팅
+        mTess = new TessBaseAPI();
+        Log.d("오류", "initOCR: " + datapath);
+        mTess.init(datapath, lang);
+    }
+
+    public String processImage(Bitmap image) {
+        String OCRresult = null;
+        mTess.setImage(image);
+        OCRresult = mTess.getUTF8Text();
+        return OCRresult;
+    }
+
+    /***
+     *  언어 데이터 파일, 디바이스에 복사
+     */
+    private void copyFiles(String lang) {
+        try{
+            String filepath = datapath + "/tessdata/" + lang + ".traineddata";
+            AssetManager assetManager = getAssets();
+            InputStream instream = assetManager.open("/tessdata/" + lang + ".traineddata");
+            OutputStream outstream = new FileOutputStream(filepath);
+            byte[] buffer = new byte[1024];
+            int read;
+            while ((read = instream.read(buffer)) != -1) {
+                outstream.write(buffer, 0, read);
+            }
+            outstream.flush();
+            outstream.close();
+            instream.close();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    /***
+     *  디바이스에 언어 데이터 파일 존재 유무 체크
+     * @param dir
+     */
+    private void checkFile(File dir, String lang) {
+        //디렉토리가 없으면 디렉토리를 만들고 그후에 파일을 카피
+        if(!dir.exists()&& dir.mkdirs()) {
+            copyFiles(lang);
+        }
+        //디렉토리가 있지만 파일이 없으면 파일카피 진행
+        if(dir.exists()) {
+            String datafilepath = datapath + "/tessdata/" + lang + ".traineddata";
+            File datafile = new File(datafilepath);
+            if(!datafile.exists()) {
+                copyFiles(lang);
+            }
+        }
+    }
 
 
     void init() {
@@ -249,10 +331,6 @@ public class ChatBotActivity extends AppCompatActivity {
 
         }
 
-        /**
-         * jhChoi - 201124
-         * 현재까지 그린 그림을 Bitmap으로 반환합니다.
-         */
         public Bitmap getCurrentCanvas() {
             Bitmap bitmap = Bitmap.createBitmap(this.getWidth(), this.getHeight(), Bitmap.Config.ARGB_8888);
             Canvas canvas = new Canvas(bitmap);
@@ -293,6 +371,10 @@ public class ChatBotActivity extends AppCompatActivity {
             int state = action == MotionEvent.ACTION_DOWN ? Pen.STATE_START : Pen.STATE_MOVE;
             drawCommandList.add(new Pen(e.getX(), e.getY(), state, color, size));
             invalidate();
+            if (e.getAction() == MotionEvent.ACTION_UP) {
+                Log.d("Dialog", "onTouchEvent: ACTION_UP" + processImage(getCurrentCanvas()));
+//                ocrManager.processImage(getCurrentCanvas());
+            }
             return true;
         }
     }
