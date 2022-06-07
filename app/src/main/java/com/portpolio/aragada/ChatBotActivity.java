@@ -45,11 +45,13 @@ import java.util.ArrayList;
 
 public class ChatBotActivity extends AppCompatActivity {
 
-    DrawCanvas drawCanvas;
-    ImageView btn_send;
+    AppCompatButton ocrResult; // 인식결과창
+    ArrayList<String> ocrText;
+    DrawCanvas drawCanvas; // ocr드로우 캔버스 클래스
+    ImageView btn_send; // 전송 버튼
     LinearLayout btn_stt, btn_ocr, ll_canvas;
     TextView tv_chat;
-    Dialog ocrDialog;
+    Dialog ocrDialog; // 다이알로그
     final int PERMISSION = 1;
     Intent intent;
     boolean drawing = false; // 그려지고 있는가
@@ -61,22 +63,22 @@ public class ChatBotActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_bot);
-        init();
-        initOCR();
-        setBtn_stt();
-        setDialog();
-        popUpOcrDialog();
-        setCanvas();
+        init(); // 이닛
+        initOCR(); // ocr이닛
+        setBtn_stt(); //음성인식 세팅
+        setDialog(); // 다이알로그 세팅
+        popUpOcrDialog(); // 필기인식 세팅
+        setCanvas(); // 필기화면 세팅
 
     }
 
     void checkPermission() {
-        if ( Build.VERSION.SDK_INT >= 23 ){
+        if (Build.VERSION.SDK_INT >= 23) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.INTERNET, Manifest.permission.RECORD_AUDIO}, PERMISSION);
         }
     }
 
-    void setBtn_stt() {
+    void setBtn_stt() { // 음성인식
         btn_stt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,14 +87,15 @@ public class ChatBotActivity extends AppCompatActivity {
         });
     }
 
-    void setDialog() {
+    void setDialog() { // 다이알로그 세팅
         ocrDialog = new Dialog(ChatBotActivity.this);
         ocrDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         ocrDialog.setContentView(R.layout.ocr_dialog);
 
-        ocrDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+        ocrDialog.setOnCancelListener(new DialogInterface.OnCancelListener() { // 다이알로그 외부 터치
             @Override
             public void onCancel(DialogInterface dialogInterface) {
+                ocrResult.setText("");
                 drawing = false;
             }
         });
@@ -108,12 +111,6 @@ public class ChatBotActivity extends AppCompatActivity {
     }
 
     void setCanvas() {
-//        Bitmap bitmap = Bitmap.createBitmap(280,200, Bitmap.Config.ARGB_8888);
-//        Canvas canvas = new Canvas(bitmap);
-//        canvas.drawColor(Color.LTGRAY);
-//        Paint p = new Paint();
-//        p.setColor(Color.DKGRAY);
-
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(840, 600);
         drawCanvas.setLayoutParams(lp);
         ll_canvas = (LinearLayout) ocrDialog.findViewById(R.id.ll_canvas);
@@ -123,11 +120,31 @@ public class ChatBotActivity extends AppCompatActivity {
     void showDialog() {
         ocrDialog.show();
 
+        ocrResult = ocrDialog.findViewById(R.id.ocrResult);
+
 
         AppCompatImageButton btn_dialog_finish = ocrDialog.findViewById(R.id.btn_dialog_finish);
         btn_dialog_finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ocrText.add(ocrResult.getText().toString());
+//                for (int i = 0; i < ocrText.size(); i++) {
+//                    String tmp = ocrText.get(i);
+//                }
+                String tmp = String.join("", ocrText);
+                tv_chat.setText(tmp);
+                ocrResult.setText("");
+                drawing = false;
+                Log.d("ocrText", "onClick: " + ocrText.size());
+                ocrDialog.dismiss();
+            }
+        });
+
+        AppCompatImageButton btn_dialog_cancel = ocrDialog.findViewById(R.id.btn_dialog_cancel);
+        btn_dialog_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ocrResult.setText("");
                 drawing = false;
                 ocrDialog.dismiss();
             }
@@ -142,19 +159,24 @@ public class ChatBotActivity extends AppCompatActivity {
     }
 
     void initOCR() {
-        //언어파일 경로
-        datapath = getFilesDir()+ "/tesseract/";
+        try {
+            //언어파일 경로
+            datapath = getFilesDir() + "/tesseract/";
 
-        //트레이닝데이터가 카피되어 있는지 체크
-        checkFile(new File(datapath + "tessdata/"), "jpn");
+            //트레이닝데이터가 카피되어 있는지 체크
+            checkFile(new File(datapath + "tessdata/"), "jpn");
 
-        //Tesseract API 언어 세팅
-        String lang = "jpn";
+            //Tesseract API 언어 세팅
+            String lang = "jpn";
 
-        //OCR 세팅
-        mTess = new TessBaseAPI();
-        Log.d("오류", "initOCR: " + datapath);
-        mTess.init(datapath, lang);
+            //OCR 세팅
+            mTess = new TessBaseAPI();
+            Log.d("오류", "initOCR: " + datapath);
+            mTess.init(datapath, lang);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     public String processImage(Bitmap image) {
@@ -164,14 +186,11 @@ public class ChatBotActivity extends AppCompatActivity {
         return OCRresult;
     }
 
-    /***
-     *  언어 데이터 파일, 디바이스에 복사
-     */
     private void copyFiles(String lang) {
-        try{
+        try {
             String filepath = datapath + "/tessdata/" + lang + ".traineddata";
             AssetManager assetManager = getAssets();
-            InputStream instream = assetManager.open("/tessdata/" + lang + ".traineddata");
+            InputStream instream = assetManager.open("tessdata/" + lang + ".traineddata");
             OutputStream outstream = new FileOutputStream(filepath);
             byte[] buffer = new byte[1024];
             int read;
@@ -190,20 +209,16 @@ public class ChatBotActivity extends AppCompatActivity {
     }
 
 
-    /***
-     *  디바이스에 언어 데이터 파일 존재 유무 체크
-     * @param dir
-     */
     private void checkFile(File dir, String lang) {
         //디렉토리가 없으면 디렉토리를 만들고 그후에 파일을 카피
-        if(!dir.exists()&& dir.mkdirs()) {
+        if (!dir.exists() && dir.mkdirs()) {
             copyFiles(lang);
         }
         //디렉토리가 있지만 파일이 없으면 파일카피 진행
-        if(dir.exists()) {
+        if (dir.exists()) {
             String datafilepath = datapath + "/tessdata/" + lang + ".traineddata";
             File datafile = new File(datafilepath);
-            if(!datafile.exists()) {
+            if (!datafile.exists()) {
                 copyFiles(lang);
             }
         }
@@ -220,6 +235,7 @@ public class ChatBotActivity extends AppCompatActivity {
         btn_stt = (LinearLayout) findViewById(R.id.btn_stt);
         tv_chat = (TextView) findViewById(R.id.tv_chat);
         drawCanvas = new DrawCanvas(this);
+        ocrText = new ArrayList<String>();
 
     }
 
@@ -290,7 +306,7 @@ public class ChatBotActivity extends AppCompatActivity {
             public void onResults(Bundle bundle) {
                 ArrayList<String> matches = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
 
-                for(int i = 0; i < matches.size() ; i++){
+                for (int i = 0; i < matches.size(); i++) {
                     tv_chat.setText(matches.get(i));
                 }
             }
@@ -373,7 +389,8 @@ public class ChatBotActivity extends AppCompatActivity {
             invalidate();
             if (e.getAction() == MotionEvent.ACTION_UP) {
                 Log.d("Dialog", "onTouchEvent: ACTION_UP" + processImage(getCurrentCanvas()));
-//                ocrManager.processImage(getCurrentCanvas());
+                ocrResult.setText(processImage(getCurrentCanvas()));
+//                processImage(getCurrentCanvas());
             }
             return true;
         }
