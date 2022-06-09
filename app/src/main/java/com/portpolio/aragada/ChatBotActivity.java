@@ -16,6 +16,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -49,6 +50,7 @@ public class ChatBotActivity extends AppCompatActivity {
     ArrayList<String> ocrText;
     DrawCanvas drawCanvas; // ocr드로우 캔버스 클래스
     ImageView btn_send; // 전송 버튼
+    ImageView btn_search, btn_backHome;
     LinearLayout btn_stt, btn_ocr, ll_canvas;
     TextView tv_chat;
     Dialog ocrDialog; // 다이알로그
@@ -69,7 +71,29 @@ public class ChatBotActivity extends AppCompatActivity {
         setDialog(); // 다이알로그 세팅
         popUpOcrDialog(); // 필기인식 세팅
         setCanvas(); // 필기화면 세팅
+        backHome();
+        search_japanese();
+    }
 
+    void backHome() {
+        btn_backHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+    }
+
+    public void search_japanese() {
+        btn_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Uri uri = Uri.parse("https://ja.dict.naver.com/#/main");
+
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+            }
+        });
     }
 
     void checkPermission() {
@@ -236,6 +260,8 @@ public class ChatBotActivity extends AppCompatActivity {
         tv_chat = (TextView) findViewById(R.id.tv_chat);
         drawCanvas = new DrawCanvas(this);
         ocrText = new ArrayList<String>();
+        btn_search = (ImageView) findViewById(R.id.btn_search);
+        btn_backHome = (ImageView) findViewById(R.id.btn_backHome);
 
     }
 
