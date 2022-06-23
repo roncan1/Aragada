@@ -30,6 +30,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,6 +52,7 @@ public class ChatBotActivity extends AppCompatActivity {
     DrawCanvas drawCanvas; // ocr드로우 캔버스 클래스
     ImageView btn_send; // 전송 버튼
     ImageView btn_search, btn_backHome;
+    ListView lv_chat_view;
     LinearLayout btn_stt, btn_ocr, ll_canvas;
     TextView tv_chat;
     Dialog ocrDialog; // 다이알로그
@@ -73,6 +75,11 @@ public class ChatBotActivity extends AppCompatActivity {
         setCanvas(); // 필기화면 세팅
         backHome();
         search_japanese();
+    }
+
+    void sendChat() {
+        String sendData = tv_chat.getText().toString();
+        lv_chat_view
     }
 
     void backHome() {
@@ -254,14 +261,15 @@ public class ChatBotActivity extends AppCompatActivity {
         intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getPackageName());
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "ja-JP");
-        btn_send = (ImageView) findViewById(R.id.btn_send);
-        btn_ocr = (LinearLayout) findViewById(R.id.btn_ocr);
-        btn_stt = (LinearLayout) findViewById(R.id.btn_stt);
-        tv_chat = (TextView) findViewById(R.id.tv_chat);
+        btn_send = findViewById(R.id.btn_send);
+        btn_ocr = findViewById(R.id.btn_ocr);
+        btn_stt = findViewById(R.id.btn_stt);
+        tv_chat = findViewById(R.id.tv_chat);
         drawCanvas = new DrawCanvas(this);
         ocrText = new ArrayList<String>();
-        btn_search = (ImageView) findViewById(R.id.btn_search);
-        btn_backHome = (ImageView) findViewById(R.id.btn_backHome);
+        btn_search = findViewById(R.id.btn_search);
+        btn_backHome = findViewById(R.id.btn_backHome);
+        lv_chat_view = findViewById(R.id.lv_chat_view);
 
     }
 
