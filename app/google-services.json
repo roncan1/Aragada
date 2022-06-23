@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "751475800645",
+    "project_id": "aragada-3b463",
+    "storage_bucket": "aragada-3b463.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:751475800645:android:7a31828a45843dfd0c012c",
+        "android_client_info": {
+          "package_name": "com.portpolio.aragada"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "751475800645-gj43a3p6s0c0i83tprtsbm43lobu985j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWarmt7D1LI5EAZCsTfcFRyqF45_XWYQw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "751475800645-gj43a3p6s0c0i83tprtsbm43lobu985j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
