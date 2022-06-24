@@ -1,5 +1,7 @@
 package com.portpolio.aragada;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatImageButton;
@@ -12,21 +14,18 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -34,7 +33,15 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.googlecode.tesseract.android.TessBaseAPI;
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -50,7 +57,7 @@ public class ChatBotActivity extends AppCompatActivity {
     AppCompatButton ocrResult; // 인식결과창
     ArrayList<String> ocrText;
     DrawCanvas drawCanvas; // ocr드로우 캔버스 클래스
-    ImageView btn_send; // 전송 버튼
+    ImageView btn_send ,btn_teach; // 전송 버튼
     ImageView btn_search, btn_backHome;
     ListView lv_chat_view;
     LinearLayout btn_stt, btn_ocr, ll_canvas;
@@ -61,6 +68,11 @@ public class ChatBotActivity extends AppCompatActivity {
     boolean drawing = false; // 그려지고 있는가
     private TessBaseAPI mTess; //Tess API reference
     String datapath = ""; //언어데이터가 있는 경로
+    String chatValue; //데이터셋 데이터
+    ArrayList<ChatData> chatDataList;
+    boolean teaching = false;
+    FirebaseDatabase db = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = db.getReference();
 
 
     @Override
@@ -75,11 +87,94 @@ public class ChatBotActivity extends AppCompatActivity {
         setCanvas(); // 필기화면 세팅
         backHome();
         search_japanese();
+        sendChat();
+    }
+
+    void addData(String data) {
+        chatDataList.add(new ChatData(data));
+    }
+
+    void showChat() {
+        final ChatAdapter chatAdapter = new ChatAdapter(this,chatDataList);
+        lv_chat_view.setAdapter(chatAdapter);
+        lv_chat_view.setSelection(chatAdapter.getCount()-1);
     }
 
     void sendChat() {
-        String sendData = tv_chat.getText().toString();
-        lv_chat_view
+
+        Log.d("dasdaadad", "teachDaara: ");
+        btn_send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                teaching = false;
+                String sendData = tv_chat.getText().toString();
+                if (sendData != "") { // 채팅창이 공백이 아니면
+                    addData(sendData); // 값 추가
+                    dbQuery(sendData);
+                    tv_chat.setText("");
+                    ocrText.clear();
+                } else {
+                    Log.d("빈 내용", "onClick: ");
+                    FancyToast.makeText(ChatBotActivity.this,"내용을 입력하세요",FancyToast.LENGTH_SHORT,FancyToast.INFO,false).show();
+                }
+            }
+        });
+
+    }
+
+    void reQuestion() {
+        addData("제가 모르는 대화군요.\n" +
+                "적절한 대답을 알려주세요!");
+        showChat();
+    }
+
+    void teachDaara(String key) {
+        teaching = true;
+        btn_teach.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String teachData = tv_chat.getText().toString();
+                if (teachData != "") { // 채팅창이 공백이 아니면
+                    addData(teachData);
+                    myRef.child("data_set").child(key).setValue(teachData);
+                    addData(teachData + "\n" +
+                            "확실히 익혔습니다..!");
+                    showChat();
+                    tv_chat.setText("");
+                    ocrText.clear();
+                } else {
+                    Log.d("빈 내용", "onClick: ");
+                    FancyToast.makeText(ChatBotActivity.this,"내용을 입력하세요",FancyToast.LENGTH_SHORT,FancyToast.INFO,false).show();
+                }
+                btn_send.setVisibility(View.VISIBLE);
+                btn_teach.setVisibility(View.GONE);
+            }
+        });
+    }
+    
+    public void dbQuery(String key) {
+        myRef.child("data_set").child(key).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                chatValue = dataSnapshot.getValue(String.class);
+                Log.i("아아아아아ㅏ아아아아", "onDataChange: " + teaching);
+                if (chatValue != null && !teaching) { // 키값으로 검색했을 때 답이 나왔다면
+                    addData(chatValue);
+                    showChat();
+                } else if (chatValue == null) {
+                    btn_send.setVisibility(View.GONE);
+                    btn_teach.setVisibility(View.VISIBLE);
+                    reQuestion();
+                    teachDaara(key);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+//                Log.e("MainActivity", String.valueOf(databaseError.toException())); // 에러문 출력
+            }
+        });
+        Log.d("값", "dbQuery: " + chatValue);
     }
 
     void backHome() {
@@ -262,6 +357,7 @@ public class ChatBotActivity extends AppCompatActivity {
         intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getPackageName());
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "ja-JP");
         btn_send = findViewById(R.id.btn_send);
+        btn_teach = findViewById(R.id.btn_teach);
         btn_ocr = findViewById(R.id.btn_ocr);
         btn_stt = findViewById(R.id.btn_stt);
         tv_chat = findViewById(R.id.tv_chat);
@@ -270,6 +366,7 @@ public class ChatBotActivity extends AppCompatActivity {
         btn_search = findViewById(R.id.btn_search);
         btn_backHome = findViewById(R.id.btn_backHome);
         lv_chat_view = findViewById(R.id.lv_chat_view);
+        chatDataList = new ArrayList<ChatData>();
 
     }
 
