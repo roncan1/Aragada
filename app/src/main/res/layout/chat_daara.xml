@@ -19,6 +19,7 @@
             android:src="@drawable/daara_icon" />
 
         <ImageButton
+            android:id="@+id/btn_chat_tts"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="#00ffffff"
