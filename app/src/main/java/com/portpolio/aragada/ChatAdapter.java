@@ -48,8 +48,25 @@ public class ChatAdapter extends BaseAdapter {
         TextView tv_daara = daaraChatView.findViewById(R.id.tv_daara);
         TextView tv_user = userChatView.findViewById(R.id.tv_user);
         ImageButton btn_tts = daaraChatView.findViewById(R.id.btn_chat_tts);
+        ImageButton btn_translate = daaraChatView.findViewById(R.id.translate);
 
         setTts();
+
+        btn_translate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new Thread() {
+                    @Override
+                    public void run() {
+                        String word = tv_daara.getText().toString();
+                        PapagoTranslate papagoTranslate = new PapagoTranslate();
+                        String resultWord;
+                        resultWord = papagoTranslate.getTranslation(word, "ja", "ko");
+                        tv_daara.setText(resultWord);
+                    }
+                }.start();
+            }
+        });
 
         btn_tts.setOnClickListener(new View.OnClickListener() {
             @Override
